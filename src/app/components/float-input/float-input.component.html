@@ -1,0 +1,5 @@
+<div>
+  <input [type]="type" [id]="placeholder" [placeholder]="placeholder" [formControlName]="formInputName">
+  <label [for]="placeholder">{{placeholder}}</label>
+  <img src="/assets/password.png" *ngIf="placeholder.includes('Senha')" (click)="toggleTypePassword()">
+</div>

@@ -1,0 +1,40 @@
+<main>
+  <div>
+    <app-header></app-header>
+
+    <div class="table">
+      <div>
+        <h4>Consulta Clínica</h4>
+        <app-custom-button text="Nova Consulta" theme="primary plus thin" (click)="shouldOpenModal = true"></app-custom-button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Especialidade</th>
+            <th>Profissional</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{item.specialty}}</td>
+            <td>{{item.medic}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.hour}}</td>
+            <td (click)="confirmation(item.id)">
+              <img src="/assets/plus.png" alt="Delete icon">
+              Desmarcar
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</main>
+
+<app-new-schedule [@opacityAnimation] *ngIf="shouldOpenModal" (closeEvent)="shouldOpenModal = false;" ></app-new-schedule>
+<app-modal-confirmation [@opacityAnimation] *ngIf="shouldOpenConfirmation" (closeEvent)="shouldOpenConfirmation = false;" [id]="id"></app-modal-confirmation>

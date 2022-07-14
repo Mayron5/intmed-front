@@ -1,0 +1,21 @@
+<main>
+  <div>
+    <img src="/assets/logo.png" alt="">
+    <h6>Crie sua conta</h6>
+
+    <form [formGroup]="userRegister" (submit)="registerUser()">
+      <app-float-input placeholder="Nome" formInputName="name"></app-float-input>
+      <app-float-input placeholder="Email" type="email" formInputName="email"></app-float-input>
+      <app-alert-message message="Digite um email válido" *ngIf="userRegister.get('email')?.invalid && userRegister.get('email')?.touched"></app-alert-message>
+      <app-float-input placeholder="Senha" type="password" formInputName="password"></app-float-input>
+      <app-alert-message message="Digite uma senha válida" *ngIf="userRegister.get('password')?.invalid && userRegister.get('password')?.touched"></app-alert-message>
+      <app-float-input placeholder="Confirme a Senha" type="password" formInputName="confirmPassword"></app-float-input>
+      <app-alert-message message="As senhas devem ser iguais!" *ngIf="userRegister.get('confirmPassword')?.invalid && userRegister.get('confirmPassword')?.touched"></app-alert-message>
+
+      <div class="buttons">
+        <app-custom-button text="Cancelar" theme="ghostPrimary" routerLink="/entrar"></app-custom-button>
+        <app-custom-button text="Confirmar" theme="primary" type="submit"></app-custom-button>
+      </div>
+    </form>
+  </div>
+</main>

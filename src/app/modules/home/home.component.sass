@@ -1,0 +1,58 @@
+@import '../../sass/variables'
+
+main
+  display: flex
+  justify-content: center
+  padding: 12px
+  > div
+    width: 100%
+    max-width: 627px
+
+.table
+  margin-top: 1.1rem
+  padding: 10px
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25)
+  border-radius: 8px
+
+  > div
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  h4
+    font-size: 18px
+    color: $black
+
+  table
+    width: 100%
+    margin: 15px 0
+    text-align: left
+    border-collapse: collapse
+
+    th, td
+      padding: 12px
+
+    thead
+      text-transform: uppercase
+      font-size: 12px
+      color: $gray2
+
+    tbody
+      font-size: 13px
+      line-height: 16px
+      color: $black
+
+      td:last-child
+        cursor: pointer
+        color: $primary
+
+        display: flex
+        align-items: center
+        gap: 8px
+
+        img
+          transform: rotate(45deg)
+          filter: brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(737%) hue-rotate(135deg) brightness(85%) contrast(80%)
+
+      tr:nth-child(even)
+        background-color: $gray1

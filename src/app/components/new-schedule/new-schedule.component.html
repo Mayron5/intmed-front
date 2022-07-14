@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="content">
+    <h4>Nova Consulta</h4>
+    <form>
+      <app-custom-select placeholder="Especialidade"></app-custom-select>
+      <app-custom-select placeholder="Médico"></app-custom-select>
+      <app-custom-select placeholder="Data"></app-custom-select>
+      <app-custom-select placeholder="Hora"></app-custom-select>
+
+      <div class="buttons">
+        <app-custom-button text="Cancelar" theme="ghostPrimary" (click)="closeModal()"></app-custom-button>
+        <app-custom-button text="Confirmar" theme="primary"></app-custom-button>
+      </div>
+    </form>
+  </div>
+</div>

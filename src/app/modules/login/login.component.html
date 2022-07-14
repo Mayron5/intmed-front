@@ -1,0 +1,19 @@
+<main>
+
+  <div>
+    <img src="/assets/logo.png">
+    <form autocomplete="off" [formGroup]="userLogin" (submit)="login()">
+      <app-float-input placeholder="Email ou Login" formInputName="login"></app-float-input>
+      <app-alert-message message="Digite um login válido" *ngIf="userLogin.get('login')?.invalid && userLogin.get('login')?.touched"></app-alert-message>
+      <app-float-input placeholder="Senha" type="password" formInputName="password"></app-float-input>
+      <app-alert-message message="Digite uma senha válida" *ngIf="userLogin.get('password')?.invalid && userLogin.get('password')?.touched"></app-alert-message>
+      <app-alert-message message="Erro ao realizar login, verifique seus dados!" *ngIf="errorLogin"></app-alert-message>
+      <app-custom-checkbox></app-custom-checkbox>
+      <div class="buttons">
+        <app-custom-button text="Criar Conta" theme="ghostPrimary" routerLink="/registrar"></app-custom-button>
+        <app-custom-button text="Acessar" theme="primary" type="submit"></app-custom-button>
+      </div>
+    </form>
+  </div>
+
+</main>
