@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OpacityAnimation } from 'src/app/animations/opacittyAnimation';
+import { ScheduleService } from 'src/app/services/schedule.service';
+import { Schedule } from 'src/app/types/schedules';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
+  providers: [ScheduleService],
   animations: [OpacityAnimation]
 })
 export class HomeComponent implements OnInit {
@@ -13,47 +16,23 @@ export class HomeComponent implements OnInit {
   public shouldOpenConfirmation: boolean = false;
   public id: number = 0;
 
-  public data = [
-    {
-      specialty: 'Cardiologia',
-      medic: 'Dr. Caio Carlos Ferreira',
-      date: '01/01/2020',
-      hour: '13:00',
-      id: 1
-    },
-    {
-      specialty: 'Cardiologia',
-      medic: 'Dr. Caio Carlos Ferreira',
-      date: '01/01/2020',
-      hour: '13:00',
-      id: 2
-    },
-    {
-      specialty: 'Cardiologia',
-      medic: 'Dr. Caio Carlos Ferreira',
-      date: '01/01/2020',
-      hour: '13:00',
-      id: 3
-    },
-    {
-      specialty: 'Cardiologia',
-      medic: 'Dr. Caio Carlos Ferreira',
-      date: '01/01/2020',
-      hour: '13:00',
-      id: 4
-    },
-    {
-      specialty: 'Cardiologia',
-      medic: 'Dr. Caio Carlos Ferreira',
-      date: '01/01/2020',
-      hour: '13:00',
-      id: 4
-    },
-  ]
+  public schedules!: Schedule[];
 
-  constructor() { }
+  constructor(
+    private _scheduleService: ScheduleService
+  ) { }
 
   ngOnInit() {
+
+    this._scheduleService.getSchedulesFromAPI();
+
+
+    this._scheduleService.getSchedules().subscribe({
+      next: (response) => {
+        this.schedules = response;
+      }
+    });
+
   }
 
   public confirmation(id: number) {

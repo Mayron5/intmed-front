@@ -1,7 +1,0 @@
-<div class="container">
-  <input type="text" (click)="toggleExpansion()" [placeholder]="placeholder" [(ngModel)]="selected" appCloseClickOutSide (clickOutside)="expanded = false;">
-  <div class="options" *ngIf="expanded" [@growVertical]>
-    <span *ngFor="let item of options | filterList: selected" (click)="setValueSelected(item)">{{item}}</span>
-  </div>
-  <img src="/assets/arrow_down.png" alt="Seta para baixo">
-</div>

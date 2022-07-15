@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ScheduleService } from 'src/app/services/schedule.service';
 
 @Component({
   selector: 'app-modal-confirmation',
@@ -10,14 +11,21 @@ export class ModalConfirmationComponent implements OnInit {
   @Input() id: any;
   @Output()  closeEvent = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private _scheduleService: ScheduleService
+  ) { }
 
   ngOnInit() {
-    console.log(this.id)
+
   }
 
   public closeModal() {
     this.closeEvent.emit(false);
+  }
+
+  public confirm() {
+    this._scheduleService.deleteSchedule(this.id);
+    this.closeModal();
   }
 
 }

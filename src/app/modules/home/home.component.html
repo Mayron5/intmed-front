@@ -19,11 +19,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data">
-            <td>{{item.specialty}}</td>
-            <td>{{item.medic}}</td>
-            <td>{{item.date}}</td>
-            <td>{{item.hour}}</td>
+          <tr *ngFor="let item of schedules">
+            <td>{{item.medico.especialidade.nome}}</td>
+            <td>{{item.medico.nome}}</td>
+            <td>{{item.dia}}</td>
+            <td>{{item.horario}}</td>
             <td (click)="confirmation(item.id)">
               <img src="/assets/plus.png" alt="Delete icon">
               Desmarcar
