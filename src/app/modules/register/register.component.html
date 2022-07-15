@@ -11,6 +11,7 @@
       <app-alert-message message="Digite uma senha válida" *ngIf="userRegister.get('password')?.invalid && userRegister.get('password')?.touched"></app-alert-message>
       <app-float-input placeholder="Confirme a Senha" type="password" formInputName="confirmPassword"></app-float-input>
       <app-alert-message message="As senhas devem ser iguais!" *ngIf="userRegister.get('confirmPassword')?.invalid && userRegister.get('confirmPassword')?.touched"></app-alert-message>
+      <app-alert-message message="Cadastrado com sucesso!" *ngIf="success" type="SUCCESS"></app-alert-message>
 
       <div class="buttons">
         <app-custom-button text="Cancelar" theme="ghostPrimary" routerLink="/entrar"></app-custom-button>
