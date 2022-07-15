@@ -5,24 +5,28 @@
 
       <div class="inputContainer">
         <select formControlName="specialty">
+          <option value="0" disabled hidden>Especialidade</option>
           <option *ngFor="let item of specialties" [value]="item.id">{{item.nome}}</option>
         </select>
       </div>
 
       <div class="inputContainer">
         <select formControlName="medic">
+          <option value="0" disabled hidden>Médico</option>
           <option *ngFor="let item of specialties" [value]="item.id">{{item.nome}}</option>
         </select>
       </div>
 
       <div class="inputContainer">
         <select formControlName="date">
+          <option value="0" disabled hidden>Data</option>
           <option *ngFor="let item of specialties" [value]="item.id">{{item.nome}}</option>
         </select>
       </div>
 
       <div class="inputContainer">
         <select formControlName="hour">
+          <option value="0" disabled hidden>Hora</option>
           <option *ngFor="let item of specialties" [value]="item.id">{{item.nome}}</option>
         </select>
       </div>

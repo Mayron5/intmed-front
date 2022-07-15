@@ -25,10 +25,10 @@ export class NewScheduleComponent implements OnInit {
   ngOnInit() {
 
     this.formNewSchedule = new FormGroup({
-      specialty: new FormControl({ value: null, disabled: false }, [Validators.required]),
-      medic: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      date: new FormControl({ value: null, disabled: true }, [Validators.required]),
-      hour: new FormControl({ value: null, disabled: true }, [Validators.required]),
+      specialty: new FormControl({ value: '0', disabled: false }, [Validators.required, Validators.min(1)]),
+      medic: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
+      date: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
+      hour: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
     })
 
     this._newScheduleSerivce.getSpecialties().subscribe({
@@ -59,7 +59,8 @@ export class NewScheduleComponent implements OnInit {
   }
 
   public confirmSchedule() {
-    this._scheduleService.postSchedule();
+    console.log(this.formNewSchedule)
+    //this._scheduleService.postSchedule();
     this.closeModal();
   }
 
