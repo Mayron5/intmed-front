@@ -59,8 +59,7 @@ export class NewScheduleComponent implements OnInit {
   }
 
   public confirmSchedule() {
-    console.log(this.formNewSchedule)
-    //this._scheduleService.postSchedule();
+    this._scheduleService.postSchedule();
     this.closeModal();
   }
 
