@@ -18,4 +18,11 @@ export class UserService {
     return this._localStorage.getItem('username');
   }
 
+  public setUserId(id: string) {
+    this._localStorage.setItem('userid', id);
+  }
+
+  public getUserId() {
+    return this._localStorage.getItem('userid')
+  }
 }

@@ -12,7 +12,7 @@ export class RegisterService {
     private _http: HttpClient
   ) { }
 
-  public register(username: string, email: string ,  password: string) {
-    return this._http.post(`${this.API_URL}/users`, { username, email, password })
+  public register(nome: string, email: string, password: string) {
+    return this._http.post(`${this.API_URL}/usuarios/`, { 'nome': nome, 'email': email, 'senha': password })
   }
 }

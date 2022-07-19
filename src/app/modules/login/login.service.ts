@@ -14,7 +14,7 @@ export class LoginService {
   ) { }
 
   public login(username: string, password: string) {
-    return this._http.post<LoginResponse>(`${this.API_URL}/users/login`, {username, password})
+    return this._http.post<LoginResponse>(`${this.API_URL}/usuario/login`, { email: username, senha: password })
   }
 
 }

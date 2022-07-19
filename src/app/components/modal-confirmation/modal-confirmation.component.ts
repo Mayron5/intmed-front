@@ -16,7 +16,6 @@ export class ModalConfirmationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
   }
 
   public closeModal() {

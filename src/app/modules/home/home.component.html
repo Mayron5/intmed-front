@@ -20,10 +20,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of appointments">
-            <td>{{item.medico.especialidade.nome}}</td>
-            <td>{{item.medico.nome}}</td>
-            <td>{{item.dia}}</td>
-            <td>{{item.horario}}</td>
+            <td>{{item.agenda.medico.especialidade.nome}}</td>
+            <td>{{item.agenda.medico.nome}}</td>
+            <td>{{item.dia | date: 'dd/MM/yyyy' }}</td>
+            <td>{{item.horario.slice(0, -3)}}</td>
             <td (click)="confirmation(item.id)">
               <img src="/assets/plus.png" alt="Delete icon">
               Desmarcar

@@ -1,9 +1,9 @@
-import { Medic } from "./medic"
+import { Schedule } from "./schedule"
 
 export type Appointment = {
   id: number,
   dia: string,
   horario: string,
   data_agendamento: Date,
-  medico: Medic
+  agenda: Schedule
 }

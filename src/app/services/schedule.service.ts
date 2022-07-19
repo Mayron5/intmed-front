@@ -30,14 +30,14 @@ export class ScheduleService {
     this.schedules.next(this.scheduleList);
   }
 
-  public getSchedulesFromAPI() {
-    this._http.get<Appointment[]>(`${this.API_URL}/consultas`).subscribe({
+  public getSchedulesFromAPI(userId: string | null) {
+    this._http.get<Appointment[]>(`${this.API_URL}/consultas?userid=1`).subscribe({
       next: (response) => this.setSchedules(response),
     });
   }
 
   public getSpecialties() {
-    return this._http.get<Specialty[]>(`${this.API_URL}/especialidades`);
+    return this._http.get<Specialty[]>(`${this.API_URL}/especialidades/`);
   }
 
   public getMedicBySpecialty(specialtyId: number) {
@@ -61,7 +61,7 @@ export class ScheduleService {
   }
 
   public deleteSchedule(id: number) {
-    this._http.delete(`${this.API_URL}/consultas/${id}`).subscribe({
+    this._http.delete(`${this.API_URL}/consultas?id=${id}`).subscribe({
       next: () => {
         this.scheduleList = this.scheduleList.filter(item => item.id !== id);
         this.schedules.next(this.scheduleList);

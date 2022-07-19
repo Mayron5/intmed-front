@@ -26,7 +26,7 @@ export class InterceptorService {
     return next.handle(request)
       .pipe(catchError((error: HttpErrorResponse): Observable<HttpEvent<any>> => {
         if (error.status === 401) this.router.navigate([''])
-        return throwError(() => new Error(error.toString()))
+        return throwError(() => new Error(error?.error.toString()))
       })
       )
   }
