@@ -3,15 +3,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Specialty } from 'src/app/types/specialty';
 import { environment } from 'src/environments/environment';
-import { Schedule } from '../types/schedules';
+import { Medic } from '../types/medic';
+import { Appointment } from '../types/appointment';
+import { Schedule } from '../types/schedule';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
 
-  private schedules = new BehaviorSubject<Schedule[]>([]);
-  private scheduleList: Schedule[] = [];
+  private schedules = new BehaviorSubject<Appointment[]>([]);
+  private scheduleList: Appointment[] = [];
 
   private API_URL = environment.API_URL;
 
@@ -23,13 +25,13 @@ export class ScheduleService {
     return this.schedules.asObservable();
   }
 
-  private setSchedules(schedules: Schedule[]) {
+  private setSchedules(schedules: Appointment[]) {
     this.scheduleList = schedules;
     this.schedules.next(this.scheduleList);
   }
 
   public getSchedulesFromAPI() {
-    this._http.get<Schedule[]>(`${this.API_URL}/consultas`).subscribe({
+    this._http.get<Appointment[]>(`${this.API_URL}/consultas`).subscribe({
       next: (response) => this.setSchedules(response),
     });
   }
@@ -38,8 +40,16 @@ export class ScheduleService {
     return this._http.get<Specialty[]>(`${this.API_URL}/especialidades`);
   }
 
+  public getMedicBySpecialty(specialtyId: number) {
+    return this._http.get<Medic[]>(`${this.API_URL}/medicos/?especialidade=${specialtyId}`);
+  }
+
+  public getAvaliableDatesAndHours(specialtyId: number, medicId: number) {
+    return this._http.get<Schedule[]>(`${this.API_URL}/agendas/?medico=${medicId}&especialidade=${specialtyId}`);
+  }
+
   public postSchedule() {
-    return this._http.post<Schedule>(`${this.API_URL}/consultas`, {
+    return this._http.post<Appointment>(`${this.API_URL}/consultas`, {
       agenda_id: 1,
       horario: '4:15'
     }).subscribe(

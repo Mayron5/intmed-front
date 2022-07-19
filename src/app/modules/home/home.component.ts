@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OpacityAnimation } from 'src/app/animations/opacittyAnimation';
 import { ScheduleService } from 'src/app/services/schedule.service';
-import { Schedule } from 'src/app/types/schedules';
+import { Appointment } from 'src/app/types/appointment';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public shouldOpenConfirmation: boolean = false;
   public id: number = 0;
 
-  public schedules!: Schedule[];
+  public appointments!: Appointment[];
 
   constructor(
     private _scheduleService: ScheduleService
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
     this._scheduleService.getSchedules().subscribe({
       next: (response) => {
-        this.schedules = response;
+        this.appointments = response;
       }
     });
 

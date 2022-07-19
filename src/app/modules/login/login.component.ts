@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.userLogin.valid) {
       this._loginService.login(this.userLogin.get('login')?.value, this.userLogin.get('password')?.value).subscribe({
-        next: (response) => {
+        next: (response : any) => {
           this._clientService.setUserName(this.userLogin.get('login')?.value);
           this._tokenService.setToken(response.token);
           this._router.navigate(['/home']);

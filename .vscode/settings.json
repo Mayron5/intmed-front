@@ -1,4 +1,3 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/849c53d3-a8a0-4021-b327-30b2ca05ef8b/microsoft.web/sites/subscriptions/849c53d3-a8a0-4021-b327-30b2ca05ef8b/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/intmed-front",
-    "appService.deploySubpath": "dist\\intmed-front"
+    "appService.defaultWebAppToDeploy": ""
 }

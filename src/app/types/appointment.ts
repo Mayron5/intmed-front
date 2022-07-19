@@ -1,6 +1,6 @@
 import { Medic } from "./medic"
 
-export type Schedule = {
+export type Appointment = {
   id: number,
   dia: string,
   horario: string,
