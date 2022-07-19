@@ -31,7 +31,7 @@ export class ScheduleService {
   }
 
   public getSchedulesFromAPI(userId: string | null) {
-    this._http.get<Appointment[]>(`${this.API_URL}/consultas?userid=1`).subscribe({
+    this._http.get<Appointment[]>(`${this.API_URL}/consultas?userid=${userId}`).subscribe({
       next: (response) => this.setSchedules(response),
     });
   }
@@ -41,18 +41,15 @@ export class ScheduleService {
   }
 
   public getMedicBySpecialty(specialtyId: number) {
-    return this._http.get<Medic[]>(`${this.API_URL}/medicos/?especialidade=${specialtyId}`);
+    return this._http.get<Medic[]>(`${this.API_URL}/medicos/?search=${specialtyId}`);
   }
 
   public getAvaliableDatesAndHours(specialtyId: number, medicId: number) {
     return this._http.get<Schedule[]>(`${this.API_URL}/agendas/?medico=${medicId}&especialidade=${specialtyId}`);
   }
 
-  public postSchedule() {
-    return this._http.post<Appointment>(`${this.API_URL}/consultas`, {
-      agenda_id: 1,
-      horario: '4:15'
-    }).subscribe(
+  public postSchedule(agenda_id: number, horario: string) {
+    return this._http.post<Appointment>(`${this.API_URL}/consultas/`, {horario, agenda_id}).subscribe(
       response => {
         this.scheduleList.push(response);
         this.schedules.next(this.scheduleList);

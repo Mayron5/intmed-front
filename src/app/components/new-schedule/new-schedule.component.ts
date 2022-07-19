@@ -17,13 +17,12 @@ export class NewScheduleComponent implements OnInit {
   public specialties: Specialty[] = [];
   public medics: Medic[] = [];
   public dates: any[] = [];
-  public hours!: any;
+  public hours: any[] = [];
 
   public formNewSchedule!: FormGroup;
 
   constructor(
-    private _newScheduleSerivce: ScheduleService,
-    private _scheduleService: ScheduleService
+    private _newScheduleSerivce: ScheduleService
   ) {
 
   }
@@ -33,8 +32,8 @@ export class NewScheduleComponent implements OnInit {
     this.formNewSchedule = new FormGroup({
       specialty: new FormControl({ value: '0', disabled: false }, [Validators.required, Validators.min(1)]),
       medic: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
-      date: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
-      hour: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(1)]),
+      date: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(2)]),
+      hour: new FormControl({ value: '0', disabled: true }, [Validators.required, Validators.min(2)]),
     })
 
     this._newScheduleSerivce.getSpecialties().subscribe({
@@ -44,31 +43,17 @@ export class NewScheduleComponent implements OnInit {
     })
 
     this.formNewSchedule.get('specialty')?.valueChanges.subscribe(
-      () => {
+      (specialty) => {
         this.formNewSchedule.get('medic')?.enable({ onlySelf: false })
-        this._newScheduleSerivce.getMedicBySpecialty(this.formNewSchedule.get('specialty')?.value).subscribe(response => this.medics = response)
+        this._newScheduleSerivce.getMedicBySpecialty(specialty).subscribe(response => this.medics = response)
         this.formNewSchedule.get('medic')?.valueChanges.subscribe(
-          () => {
-            this.dates = [];
-            this.hours = null;
-            let schedules: Schedule[] = [];
-
-            this._newScheduleSerivce.getAvaliableDatesAndHours(
-              this.formNewSchedule.get('specialty')?.value,
-              this.formNewSchedule.get('medic')?.value
-            ).subscribe(response => {
-              schedules = response;
-              const filtted = schedules.filter(item => item.medico.id === +this.formNewSchedule.get('medic')?.value);
-              filtted.map(item => this.dates.push(item.dia))
-            })
-
+          (medic) => {
+            this._newScheduleSerivce.getAvaliableDatesAndHours(specialty, medic).subscribe(response => { this.dates = response })
             this.formNewSchedule.get('date')?.enable({ onlySelf: false })
-
             this.formNewSchedule.get('date')?.valueChanges.subscribe(
-              () => {
+              (date) => {
                 this.formNewSchedule.get('hour')?.enable({ onlySelf: false })
-                const filtted = schedules.filter(item => item.dia === this.formNewSchedule.get('date')?.value && item.medico.id === +this.formNewSchedule.get('medic')?.value);
-                this.hours = filtted[0]
+                this.hours = this.dates.filter(item => item.dia === date)[0]?.horarios
               }
             )
           }
@@ -80,7 +65,9 @@ export class NewScheduleComponent implements OnInit {
   }
 
   public confirmSchedule() {
-    this._scheduleService.postSchedule();
+
+    const scheduleId = this.dates.filter(item => this.formNewSchedule.get('date')?.value === item.dia)[0]?.id;
+    this._newScheduleSerivce.postSchedule(scheduleId, this.formNewSchedule.get('hour')?.value);
     this.closeModal();
   }
 

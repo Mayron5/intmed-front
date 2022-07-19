@@ -20,14 +20,14 @@
       <div class="inputContainer">
         <select formControlName="date">
           <option value="0" disabled hidden>Data</option>
-          <option *ngFor="let item of dates" [value]="item">{{item}}</option>
+          <option *ngFor="let item of dates" [value]="item.dia">{{item.dia | date: 'dd/MM/YYYY'}}</option>
         </select>
       </div>
 
       <div class="inputContainer">
         <select formControlName="hour">
           <option value="0" disabled hidden>Hora</option>
-          <option *ngFor="let item of hours?.horarios" [value]="item">{{item}}</option>
+          <option *ngFor="let item of hours" [value]="item">{{item}}</option>
         </select>
       </div>
 
