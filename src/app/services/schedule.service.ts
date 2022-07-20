@@ -48,13 +48,14 @@ export class ScheduleService {
     return this._http.get<Schedule[]>(`${this.API_URL}/agendas/?medico=${medicId}&especialidade=${specialtyId}`);
   }
 
-  public postSchedule(agenda_id: number, horario: string) {
-    return this._http.post<Appointment>(`${this.API_URL}/consultas/`, {horario, agenda_id}).subscribe(
-      response => {
+  public postSchedule(agenda_id: number, horario: string, usuario_id: string | null) {
+    return this._http.post<Appointment>(`${this.API_URL}/consultas/`, {horario, agenda_id, usuario_id}).subscribe({
+      next: (response) => {
         this.scheduleList.push(response);
         this.schedules.next(this.scheduleList);
-      }
-    )
+      },
+      error: (error) => alert(error)
+    })
   }
 
   public deleteSchedule(id: number) {
@@ -62,7 +63,8 @@ export class ScheduleService {
       next: () => {
         this.scheduleList = this.scheduleList.filter(item => item.id !== id);
         this.schedules.next(this.scheduleList);
-      }
+      },
+      error: (error) => alert(error)
     })
   }
 

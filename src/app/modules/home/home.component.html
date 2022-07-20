@@ -5,7 +5,8 @@
     <div class="table">
       <div>
         <h4>Consulta Clínica</h4>
-        <app-custom-button text="Nova Consulta" theme="primary plus thin" (click)="shouldOpenModal = true"></app-custom-button>
+        <app-custom-button text="Nova Consulta" theme="primary plus thin" (click)="shouldOpenModal = true">
+        </app-custom-button>
       </div>
 
       <table>
@@ -31,10 +32,10 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </main>
-
-<app-new-schedule [@opacityAnimation] *ngIf="shouldOpenModal" (closeEvent)="shouldOpenModal = false;" ></app-new-schedule>
-<app-modal-confirmation [@opacityAnimation] *ngIf="shouldOpenConfirmation" (closeEvent)="shouldOpenConfirmation = false;" [id]="id"></app-modal-confirmation>
+<app-new-schedule [@opacityAnimation] *ngIf="shouldOpenModal" (closeEvent)="shouldOpenModal = false;">
+</app-new-schedule>
+<app-modal-confirmation [@opacityAnimation] *ngIf="shouldOpenConfirmation"
+  (closeEvent)="shouldOpenConfirmation = false;" [id]="id"></app-modal-confirmation>
